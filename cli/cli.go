@@ -32,11 +32,10 @@ func main() {
 	del.HandleFunc("/tunnel", hs.DisconnectTunnel)
 	post.HandleFunc("/tunnel/local", hs.CreateLocalTunnel)
 	post.HandleFunc("/tunnel/remote", hs.CreateRemoteTunnel)
+	router.Use(mux.CORSMethodMiddleware(router))
 
 	log.Print("Listening for request at ", addr, "...\n")
-	finalRouter := mux.NewRouter()
-	finalRouter.Use(mux.CORSMethodMiddleware(router))
-	http.ListenAndServe(addr, finalRouter)
+	http.ListenAndServe(addr, router)
 }
 
 func getCertificate() []byte {
