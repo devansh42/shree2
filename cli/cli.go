@@ -9,20 +9,20 @@ import (
 	"strings"
 	"time"
 
-	"github.com/devansh42/shree2/cli/app"
 	"github.com/gorilla/mux"
 )
 
 const addr = ":5000"
 
 func main() {
+	//! Doing for testing purpose
 
 	rand.Seed(time.Now().UnixNano())
-	uid := rand.Int()
-	certBytes := getCertificate()
-	cli := app.New(certBytes, uid)
-	hs := httpServer{cli}
-
+	// uid := rand.Int()
+	// certBytes := getCertificate()
+	// cli := app.New(certBytes, uid)
+	// hs := httpServer{cli}
+	hs := testhttpServer{}
 	router := mux.NewRouter()
 	get := router.Methods("GET").Subrouter()
 	del := router.Methods("DELETE").Subrouter()
