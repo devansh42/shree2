@@ -1,4 +1,4 @@
-import { Container, Menu } from 'semantic-ui-react';
+import { Container, Grid, Menu, Segment } from 'semantic-ui-react';
 import {
   BrowserRouter as Router,
   Link,
@@ -36,16 +36,22 @@ function App() {
 
           </Menu>
           <div>
-            <Routes>
-              <Route element={<ListTunnels />} path="/">
-              </Route>
-              <Route element={<ListTunnels />} path="/list">
-              </Route>
-              <Route element={<LocalTunnel />} path="/localTunnel">
-              </Route>
-              <Route element={<RemoteTunnel />} path="/remoteTunnel">
-              </Route>
-            </Routes>
+            <Grid centered>
+              <Grid.Column width="8">
+                <Segment >
+                  <Routes>
+                    <Route element={<ListTunnels />} path="/">
+                    </Route>
+                    <Route element={<ListTunnels />} path="/list">
+                    </Route>
+                    <Route element={<LocalTunnel />} path="/localTunnel">
+                    </Route>
+                    <Route element={<RemoteTunnel />} path="/remoteTunnel">
+                    </Route>
+                  </Routes>
+                </Segment>
+              </Grid.Column>
+            </Grid>
           </div>
         </Router>
       </Container>
