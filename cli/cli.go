@@ -23,6 +23,7 @@ func main() {
 	// cli := app.New(certBytes, uid)
 	// hs := httpServer{cli}
 	hs := testhttpServer{}
+
 	router := mux.NewRouter()
 	get := router.Methods("GET").Subrouter()
 	del := router.Methods("DELETE").Subrouter()
@@ -33,8 +34,9 @@ func main() {
 	post.HandleFunc("/tunnel/remote", hs.CreateRemoteTunnel)
 
 	log.Print("Listening for request at ", addr, "...\n")
-
-	http.ListenAndServe(addr, router)
+	finalRouter := mux.NewRouter()
+	finalRouter.Use(mux.CORSMethodMiddleware(router))
+	http.ListenAndServe(addr, finalRouter)
 }
 
 func getCertificate() []byte {
